@@ -30,6 +30,24 @@ app.get("/search/book", async (req, res) => {
   }
 });
 
+app.get("/lookup/book", async (req, res) => {
+  // 클라이언트가 보낸 쿼리값을 받아서
+  const { ISBN } = req.query;
+  //   const url = `http://www.aladin.co.kr/~${encodeURIComponent(searchQuery)}`;
+  const url = `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbpsi_321109003&itemIdType=ISBN13&ItemId=${ISBN}&output=js`;
+
+  try {
+    // 알라딘 서버에 검색 요청
+    const {
+      data: { item: result },
+    } = await axios.get(url);
+    // 응답을 받으면 클라이언트에게 전달
+    if (result) res.status(200).send(result);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.listen(3000, () => {
   console.log("Listening to port 3000...");
 });
