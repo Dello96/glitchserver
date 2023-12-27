@@ -11,6 +11,7 @@ app.use(cors({ origin: true, credentials: true })); // cors 허용
 app.use(express.json());
 
 app.get("/search/book", async (req, res) => {
+  console.log("req.query", req.query);
   // 클라이언트가 보낸 쿼리값을 받아서
   const { searchQuery } = req.query;
   //   const url = `http://www.aladin.co.kr/~${encodeURIComponent(searchQuery)}`;
@@ -32,9 +33,11 @@ app.get("/search/book", async (req, res) => {
 
 app.get("/lookup/book", async (req, res) => {
   // 클라이언트가 보낸 쿼리값을 받아서
-  const { ISBN } = req.query;
+  const ISBN = req.query;
+  console.log("req.query", req.query);
   //   const url = `http://www.aladin.co.kr/~${encodeURIComponent(searchQuery)}`;
-  const url = `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbpsi_321109003&itemIdType=ISBN13&ItemId=${ISBN}&output=js`;
+  //   const url = `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbpsi_321109003&itemIdType=ISBN13&ItemId=${ISBN}&output=js`;
+  const url = `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbpsi_321109003&itemIdType=ISBN&ItemId=${ISBN}&output=js&Version=20131101&OptResult=ebookList,usedList,reviewList`;
 
   try {
     // 알라딘 서버에 검색 요청
