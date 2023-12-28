@@ -33,7 +33,7 @@ app.get("/search/book", async (req, res) => {
 
 app.get("/lookup/book", async (req, res) => {
   // 클라이언트가 보낸 쿼리값을 받아서
-  const ISBN13 = req.query;
+  const { ISBN13 } = req.query;
   console.log("req.query", req.query);
   //   const url = `http://www.aladin.co.kr/~${encodeURIComponent(searchQuery)}`;
   //   const url = `http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbpsi_321109003&itemIdType=ISBN13&ItemId=${ISBN}&output=js`;
